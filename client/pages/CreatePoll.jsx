@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { BrowserRouter, useNavigate } from "react-router-dom";
 // import Questions from '../components/Questions';
 
 export const CreatePoll = () => {

@@ -17,17 +17,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(cors());
 /////////////////////////
-app.get("/api/flasks", async(req, res)=>{
+app.get("/api/:id", async(req, res)=>{
+  try{
+    const results = await db.query("SELECT * FROM poll WHERE poll_id = $1", [req.params.id]);
+    console.log(results);
+    res.status(200).json({
+      status: "success",
+      results: results.rows.length,
+        poll: results.rows
+    })
+  } catch(err){ 
+    console.log(err)
+  }
+})
+
+app.get("/api", async(req, res)=>{
     try{
-      const results = await db.query("SELECT * FROM cell_bank");
-      // LEFT OUTER JOIN cell_bank ON flasks.cell_bank=cell_bank.cell_bank ORDER BY flasks.id
+      const results = await db.query("SELECT * FROM poll");
       console.log(results);
       res.status(200).json({
         status: "success",
         results: results.rows.length,
-        data: {
-          flasks: results.rows
-        }
+          poll: results.rows
       })
     } catch(err){ 
       console.log(err)

@@ -4,6 +4,8 @@ import React from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreatePoll from './pages/CreatePoll';
+import TakePoll from './pages/TakePoll';
+import DisplayPoll from "./pages/DisplayPoll";
 
 {/* <Route path='/' element={<Homepage />} /> */}
 
@@ -12,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Link to='/login'>Login - TEST LINK</Link>
       <Link to='/signup'>Signup - TEST LINK</Link>
+      <Link to='/1/display'>diplay1</Link>
       <Routes>
         <Route path='/' element={<CreatePoll />} />
         <Route path='/:id' element={<TakePoll />} />
