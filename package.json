@@ -1,0 +1,55 @@
+{
+  "name": "scratch",
+  "version": "1.0.0",
+  "description": "Application to create polls and share",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack",
+    "dev-front": "NODE_ENV=development webpack serve --open",
+    "dev-back": "nodemon server/server.js",
+    "dev-hour": "npm run dev-back & npm run dev-front",
+    "prod-hour": "npm run build && nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Red-lipped-Batfish-54/scratch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Red-lipped-Batfish-54/scratch/issues"
+  },
+  "homepage": "https://github.com/Red-lipped-Batfish-54/scratch#readme",
+  "dependencies": {
+    "concurrently": "^7.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.28.0",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "node-fetch": "^3.3.0",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.4.3",
+    "react-router-dom": "^6.4.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "sass": "^1.56.1",
+    "sass-loader": "^13.2.0",
+    "source-map-loader": "^4.0.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}

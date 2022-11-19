@@ -6,7 +6,7 @@
 // npm install webpack-dev-server --save-dev
 // npm i -D webpack webpack-cli
 // npm install --save-dev html-webpack-plugin
-// npx webpack serve
+
 // npm install nodemon
 //npm install express
 //npm install node-fetch
@@ -14,3 +14,7 @@
 // npm install -D source-map-loader
 // npm install cors
 // npm install moment --save
+npm install dotenv --save
+npm i eslint 
+// npx webpack serve
+// npm install concurrently
