@@ -22,14 +22,14 @@ npm i eslint
 
 SQL commands
 
-CREATE TABLE poll (
-id BIGSERIAL NOT NULL PRIMARY KEY,
-poll_id INT NOT NULL, 
-poll_options VARCHAR(50), 
-users VARCHAR(50), 
-);
+CREATE TABLE poll (id BIGSERIAL NOT NULL PRIMARY KEY, poll_id INT NOT NULL, poll_options VARCHAR(50), users VARCHAR(50), entries VARCHAR(50));
 
 
 INSERT INTO poll (poll_id, poll_options) values (1, 'cats');
+INSERT INTO poll (poll_id, poll_options) values (1, 'dogs');
+INSERT INTO poll (poll_id, poll_options) values (1, 'birds');
+
+
+INSERT INTO poll (poll_id, users, entries) values (1, 'Bob', 'dogs');
 
 SELECT * FROM poll;  see all of cell_bank
