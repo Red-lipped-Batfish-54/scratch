@@ -20,7 +20,7 @@ app.use(cors());
 app.get("/api/:id", async(req, res)=>{
   try{
     const results = await db.query("SELECT * FROM poll WHERE poll_id = $1", [req.params.id]);
-    console.log(results);
+    console.log('results', results);
     res.status(200).json({
       status: "success",
       results: results.rows.length,
