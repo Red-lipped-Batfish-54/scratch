@@ -8,7 +8,7 @@ function DisplayPoll() {
 
     useEffect(()=>{
         const fetchPolls = async () => {
-            let response = await fetch(`http://localhost:3000/api/${id}`)
+            let response = await fetch(`http://localhost:3000/api/poll/${id}`)
         let data = await response.json()
         // console.log(data)
         setPolls(data.poll)
@@ -22,7 +22,7 @@ function DisplayPoll() {
     let filteredPoll = polls.filter(poll => poll.entries !== null)
     console.log('filteredPoll', filteredPoll)
 
-    
+
     
     return (
      
