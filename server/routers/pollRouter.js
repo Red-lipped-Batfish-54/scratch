@@ -7,12 +7,17 @@ router.post('/', pollFunctions.savePollFormat, (req, res) => {
     return;
 })
 
+router.get('/:id', pollFunctions.getPollFormat, (req, res) => {
+    res.status(200).json(res.locals.poll_options);
+    return;
+})
+
 router.post('/:id', pollFunctions.savePollResponse, (req, res) => {
     res.status(200).json(res.locals);
     return;   
 })
 
-router.get('/:id', pollFunctions.getPollResponses, (req, res) => {
+router.get('/:id/display', pollFunctions.getPollResponses, (req, res) => {
     res.status(200).json(res.locals);
     return;  
 })

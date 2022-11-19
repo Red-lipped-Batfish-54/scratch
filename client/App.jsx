@@ -5,8 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreatePoll from './pages/CreatePoll';
 import TakePoll from './pages/TakePoll';
-import DisplayPoll from './pages/DisplayPoll';
-import TakePoll from "./pages/TakePoll"
+// import DisplayPoll from './pages/DisplayPoll';
 
 {/* <Route path='/' element={<Homepage />} /> */}
 

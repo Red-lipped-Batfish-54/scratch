@@ -2,7 +2,7 @@
 const express = require('express');
 const db = require('./db/db.js');
 const cors = require('cors');
-const cookierParser = require('cookie-parser');
+// const cookierParser = require('cookie-parser');
 const path = require('path');
 
 // Import custom middleware
