@@ -33,3 +33,8 @@ INSERT INTO poll (poll_id, poll_options) values (1, 'birds');
 INSERT INTO poll (poll_id, users, entries) values (1, 'Bob', 'dogs');
 
 SELECT * FROM poll;  see all of cell_bank
+
+
+ALTER TABLE poll ADD COLUMN poll_prompt VARCHAR(100);
+
+INSERT INTO poll (poll_id, poll_prompt) values (1,'What is your favorite type of pet?');

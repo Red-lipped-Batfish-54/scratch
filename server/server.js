@@ -2,7 +2,7 @@
 const express = require('express');
 const db = require('./db/db.js');
 const cors = require('cors');
-const cookierParser = require('cookie-parser');
+// const cookierParser = require('cookie-parser');
 const path = require('path');
 
 // Import custom middleware
@@ -45,15 +45,12 @@ app.use('/api/poll', pollRouter);
 // Test route for database
 app.get("/api/flasks", async(req, res)=>{
     try{
-      const results = await db.query("SELECT * FROM cell_bank");
-      // LEFT OUTER JOIN cell_bank ON flasks.cell_bank=cell_bank.cell_bank ORDER BY flasks.id
+      const results = await db.query("SELECT * FROM poll");
       console.log(results);
       res.status(200).json({
         status: "success",
         results: results.rows.length,
-        data: {
-          flasks: results.rows
-        }
+          poll: results.rows
       })
     } catch(err){ 
       console.log(err)
