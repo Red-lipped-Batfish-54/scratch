@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Questions from '../components/Questions';
+// import Questions from '../components/Questions';
 
 export const CreatePoll = () => {
   const navigate = useNavigate();

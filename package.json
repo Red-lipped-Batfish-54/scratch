@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Red-lipped-Batfish-54/scratch#readme",
   "dependencies": {
     "concurrently": "^7.5.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "eslint": "^8.28.0",
