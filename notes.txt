@@ -18,3 +18,18 @@ npm install dotenv --save
 npm i eslint 
 // npx webpack serve
 // npm install concurrently
+
+
+SQL commands
+
+CREATE TABLE poll (
+id BIGSERIAL NOT NULL PRIMARY KEY,
+poll_id INT NOT NULL, 
+poll_options VARCHAR(50), 
+users VARCHAR(50), 
+);
+
+
+INSERT INTO poll (poll_id, poll_options) values (1, 'cats');
+
+SELECT * FROM poll;  see all of cell_bank
