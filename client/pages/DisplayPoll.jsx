@@ -19,9 +19,15 @@ function DisplayPoll() {
     },[])  
     console.log(polls)
 
+    let filteredPoll = polls.filter(poll => poll.entries !== null)
+    console.log('filteredPoll', filteredPoll)
+
+    
+    
     return (
      
         <div>
+    
       <div className="list-group">
         <table className="table table-hover table-dark">
           <thead>
@@ -35,8 +41,8 @@ function DisplayPoll() {
 
           <tbody>
             
-                {   polls &&
-                    polls.map(poll => {
+                {   filteredPoll &&
+                    filteredPoll.map(poll => {
                         return (
                             <tr key={polls.id} value={poll.id} onClick={(e)=> navigateFlask(e, poll.id)}>
                                 <td className="text-center">{poll.poll_id}</td>
