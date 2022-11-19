@@ -1,22 +1,48 @@
+// Import express and import middleware dependencies
 const express = require('express');
-// const cookierParser = require('cookie-parser');
-const path = require('path');
 const db = require('./db/db.js');
+const cors = require('cors');
+const cookierParser = require('cookie-parser');
+const path = require('path');
+
+// Import custom middleware
+const userRouter = require('./routers/userRouter.js')
+const pollRouter = require('./routers/pollRouter.js')
+
+// Create App
 const PORT = 3000;
-
-
-
-const cors = require('cors')
 const app = express();
 
-
+// Use global middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 // app.use(cookieParser());
 
-app.use(express.static(path.resolve(__dirname, '../client')));
-app.use(cors());
-/////////////////////////
+// Create routes for index.html, bundle.js, and bundle.js.map
+// We could have served everything in the build folder as static
+// or just send routes for the files we want to use.
+// Both of these are tested and work.
+// Option a)
+// app.use(express.static(path.resolve(__dirname, '../build')));
+// Option b)
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build/index.html' ));
+})
+app.get('/bundle.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build/bundle.js'));
+});
+app.get('/bundle.js.map', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build/bundle.js.map'));
+});
+
+// Handle routes to user functionality
+app.use('/api/user', userRouter);
+
+// Handle routes to poll functionality
+app.use('/api/poll', pollRouter);
+
+// Test route for database
 app.get("/api/flasks", async(req, res)=>{
     try{
       const results = await db.query("SELECT * FROM cell_bank");
@@ -33,9 +59,14 @@ app.get("/api/flasks", async(req, res)=>{
       console.log(err)
     }
 })
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.sendStatus(500);
+})
   
 
-////////////////////////////
 app.listen(PORT, () => console.log(`SERVER IS LISTENING ON PORT: ${PORT}`)); //listens on port 3000 -> http://localhost:3000/
 
-// modules.exports = app;
+module.exports = app;
