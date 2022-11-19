@@ -14,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Link to='/login'>Login - TEST LINK</Link>
       <Link to='/signup'>Signup - TEST LINK</Link>
+      <Link to='/1/display'>diplay1</Link>
       <Routes>
         <Route path='/' element={<CreatePoll />} />
         <Route path='/:id' element={<TakePoll />} />
