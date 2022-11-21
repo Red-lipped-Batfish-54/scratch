@@ -19,7 +19,7 @@ function DisplayPoll() {
 
     useEffect(()=>{
         const fetchPolls = async () => {
-            let response = await fetch(`http://localhost:3000/api/poll/${id}`)
+            let response = await fetch(`http://localhost:3000/api/poll/${id}/display`)
         let data = await response.json()
 
         setPolls(data.poll)
@@ -45,7 +45,7 @@ function DisplayPoll() {
         // navigateFlaskHome()
 
       const fetchPolls = async () => {
-        let response = await fetch(`http://localhost:3000/api/poll/${id}`)
+        let response = await fetch(`http://localhost:3000/api/poll/${id}/display`)
         let data = await response.json()
         setPolls(data.poll)
         }
