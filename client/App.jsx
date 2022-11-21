@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreatePoll from './pages/CreatePoll';
 import TakePoll from './pages/TakePoll';
-import DisplayPoll from "./pages/DisplayPoll";
+import { DisplayPoll, UpdateTable } from "./pages/DisplayPoll";
 
 {/* <Route path='/' element={<Homepage />} /> */}
 
@@ -20,9 +20,15 @@ function App() {
 
   return (
     <>
-      <Link to='/login'>Login - TEST LINK</Link>
-      <Link to='/signup'>Signup - TEST LINK</Link>
-      <Link to='/1/display'>diplay1</Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+      <ul className="navbar-nav float-end">  
+        <li className="nav-link"><Link to='/login'>Login</Link></li>
+        <li className="nav-link"><Link to='/signup'>Sign-up</Link></li>
+        <li className="nav-link"><Link to='/'>Home</Link></li> 
+        <li className="nav-link"><Link to='/1/display'>Display1</Link></li>
+      </ul>
+    </nav>
+
       <Routes>
         <Route path='/' element={<CreatePoll />} />
         <Route path='/:id' element={<TakePoll />} />
