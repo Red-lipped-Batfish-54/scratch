@@ -3,7 +3,7 @@ const router = express.Router();
 const pollFunctions = require('../middleware/pollMiddleware');
 
 router.post('/', pollFunctions.savePollFormat, (req, res) => {
-    res.status(200).json(res.locals.updates);
+    res.status(200).json(res.locals.pollID);
     return;
 })
 

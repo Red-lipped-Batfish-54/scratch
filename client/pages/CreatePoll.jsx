@@ -13,7 +13,6 @@ export const CreatePoll = () => {
       const answer = `answer${i}`;
       results.push(e.target[answer].value);
     }
-    console.log(results);
 
     const response = await fetch('./api/poll', {
       method: 'POST',
@@ -22,8 +21,8 @@ export const CreatePoll = () => {
       },
       body: JSON.stringify(results)
     });
-    const data = response.json();
-    console.log(data);
+    const data = await response.json();
+    navigate(`/${data}/display`);
   }
 
   const numOfQuestions = [];

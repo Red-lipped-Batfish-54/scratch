@@ -14,10 +14,11 @@ middleware.savePollFormat = async (req, res, next) => {
 
     for (let i = 1; i < req.body.length; i++) {
       const insert = "INSERT INTO poll (poll_id, poll_options, poll_prompt) VALUES ($1, $2, $3)" ;
-      db.query(insert, [maxID, prompt, options[i]], (err, res) => {
+      db.query(insert, [maxID, options[i], prompt], (err, res) => {
         console.log('update successful')
       })
     }
+    res.locals.pollID = maxID;
     return next();
   } catch(err) {
     console.log(err)
