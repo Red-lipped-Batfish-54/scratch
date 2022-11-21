@@ -13,6 +13,8 @@ body {
 }
 
 .displayPoll {
+    background-image: url(https://img.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg?w=2000);
+    background-size: cover;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -21,15 +23,20 @@ body {
 }
 
 .display-list-group {
-    width: 70%;
+    width: 100;
     
 }
 
+.display-list-group2 {
+    width: 800px;
+    
+}
 .display-barchart {
-    /* margin: 10rem 10rem 10rem 10rem;
-    width: 800px; */
+    /* margin: 10rem 10rem 10rem 10rem; */
+    width: 800px;
     /* flex: flex-grow; */
-    width: 100%;
+ 
+    ;
 
 
   }

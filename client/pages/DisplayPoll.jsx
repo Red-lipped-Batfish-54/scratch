@@ -89,11 +89,13 @@ function DisplayPoll() {
 // 
     return (
      
-     <div className="displayPoll">
-      <div className="displayPrompt"><h2>{{...prompt[0]}.poll_prompt}</h2></div>        
+     <div className="displayPoll mb-5">
+    
+      <div className="displayPrompt text-secondary"><h1>{{...prompt[0]}.poll_prompt}</h1></div>        
     {/* bar chart below */}
-      <div className="barchartdiv">
-        <Bar className="display-barchart" data={pollGraph} options={{
+      <div className="barchartdiv mb-5">
+         <h3 className="text-center text-muted">Poll Graph</h3>
+         <Bar className="display-barchart" data={pollGraph} options={{
             title: {
             display: true,
             text: 'od600'
@@ -106,37 +108,27 @@ function DisplayPoll() {
         </div>
     {/*  */}
      
-         
-    {   polls.filter(poll => poll.entries !== null) &&
-      polls.filter(poll => poll.entries !== null).map(poll => { return (<UpdateTable poll={poll} setValue={setValue}></UpdateTable>) })
-      }
-        
-            
-
-           
-       
-      
+   
      {/*  */} 
-     <div className="display-list-group2">
-     <table className="table table-hover table-dark">
+     <h3 className="text-muted mt-5">Individual Results</h3>
+     <div className="display-list-group2 mt-2 mb-5">
+     <table className="table table-hover table-light">
        <thead>
          <tr className="bg-primary table-warning">
-             <th className="text-center" scope="col">poll_id</th>
-             <th className="text-center" scope="col">poll_options</th>
+             
              <th className="text-center" scope="col">Users</th>
              <th className="text-center" scope="col">Vote</th>
-             <th className="text-center" scope="col">delete</th>
+             <th className="text-center" scope="col">Delete</th>
          </tr>
        </thead>
 
        <tbody>
-         
+
              {   filteredPoll &&
                  filteredPoll.map(poll => {
                      return (
                          <tr key={poll.id} value={poll.id} >
-                             <td className="text-center">{poll.poll_id}</td>
-                             <td className="text-center">{poll.poll_options}</td>
+                             
                              <td className="text-center">{poll.users}</td>
                              <td className="text-center">{poll.entries}</td>
                              <td className="text-center"><button type="submit" onClick={(e) => handleDelete(e, poll.id, poll.poll_id, poll.users, poll.entries)} className="btn btn-danger btn-sm ">Delete</button></td>
@@ -150,6 +142,12 @@ function DisplayPoll() {
    </div>
      
      {/*  */}
+
+     <h3 className="text-muted mt-5 ">Update Poll</h3>
+     {   polls.filter(poll => poll.entries !== null) &&
+      polls.filter(poll => poll.entries !== null).map(poll => { return (<UpdateTable poll={poll} setValue={setValue}></UpdateTable>) })
+      }
+
     </div>
     )
 }
@@ -162,14 +160,11 @@ function UpdateTable({poll, setValue}) {
   const refreshPage = ()=>{
     window.location.reload();
  }
-
-  // console.log('poll prop in updateTable component', poll.users)
   async function handleSubmit(e, key, poll_id){
-    // console.log('enters handleUpdate', 'e', e)
-    // console.log('alll handleUpdate params', e, key, poll_id, options, users, entries)
+
     e.stopPropagation();
     e.preventDefault();
-    // console.log('po'key', key)
+
     async function postFlask (){
         const response = await fetch(`http://localhost:3000/api/poll/${poll_id}/${key}`, {
             method: 'PUT',
@@ -181,13 +176,8 @@ function UpdateTable({poll, setValue}) {
               entries 
             })
         })
-      // const data = await response.json()  
-      // setFlasks(data.data.flasks) 
-      // console.log('submit update flask', data)
     }
     await postFlask()
-    // await forceUpdate()
-    // await setValue('update')
     await refreshPage()
     .catch(err => console.log('error in post server adding flask'))
     
@@ -202,12 +192,12 @@ function UpdateTable({poll, setValue}) {
         <form key={poll.id} action="">
             <div className="form-row row mb-3">
             <div className="col-sm">
-            users <input type="text" value={users} onChange={e=> setUsers(e.target.value)} className="form-control" />
+            Users <input type="text" value={users} onChange={e=> setUsers(e.target.value)} className="form-control" />
          </div> 
          <div className="col-sm">
-            vote <input type="text" className="form-control" value={entries} onChange={e=> setEntries(e.target.value)}/>
+            Vote <input type="text" className="form-control" value={entries} onChange={e=> setEntries(e.target.value)}/>
          </div> 
-            <button type="submit" onClick={(e) => handleSubmit(e, poll.id, poll.poll_id)} className="btn btn-danger btn-sm  ">Update</button>   
+            <button type="submit" onClick={(e) => handleSubmit(e, poll.id, poll.poll_id)} className="btn btn-warning btn-sm  ">Update</button>   
           </div>
                          
           </form>
