@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Red-lipped-Batfish-54/scratch#readme",
   "dependencies": {
+    "chart.js": "^4.0.1",
     "concurrently": "^7.5.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -34,6 +35,7 @@
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.8.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.0.1",
     "react-dom": "^18.2.0",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3"

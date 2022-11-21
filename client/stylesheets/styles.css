@@ -6,3 +6,37 @@ body {
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnPP9B7sJlf97pafbiCNpSpHJ23MP7t3m1-w&usqp=CAU);
     background-size: cover;
 }
+
+
+.displayPrompt {
+    margin: 5% 5%
+}
+
+.displayPoll {
+    background-image: url(https://img.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg?w=2000);
+    background-size: cover;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.display-list-group {
+    width: 100;
+    
+}
+
+.display-list-group2 {
+    width: 800px;
+    
+}
+.display-barchart {
+    /* margin: 10rem 10rem 10rem 10rem; */
+    width: 800px;
+   
+    /* flex: flex-grow; */
+
+  }
+  
