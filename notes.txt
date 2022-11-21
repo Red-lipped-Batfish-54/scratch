@@ -18,6 +18,8 @@ npm install dotenv --save
 npm i eslint 
 // npx webpack serve
 // npm install concurrently
+// npm install chart.js
+// npm install react-chartjs-2
 
 
 SQL commands
@@ -38,3 +40,9 @@ SELECT * FROM poll;  see all of cell_bank
 ALTER TABLE poll ADD COLUMN poll_prompt VARCHAR(100);
 
 INSERT INTO poll (poll_id, poll_prompt) values (1,'What is your favorite type of pet?');
+
+//spelled fishes wrong so correcting it
+UPDATE poll SET poll_options = 'fishes' WHERE id = 7;
+
+//update jess
+"UPDATE poll SET poll_id, options=$2, users=$3, entries=$4 WHERE id=$5 returning *"

@@ -1,13 +1,8 @@
 const { Pool } = require('pg');
-// const dotenv = require('dotenv');
-// const config = dotenv.config();
-
-const PG_URI = 'postgres://adkyirma:w7PmsQmuimLfkILvmUJfdJdvW2AZorP5@heffalump.db.elephantsql.com/adkyirma';
+require('dotenv').config();
 
 // create a new pool here using the connection string above
-const pool = new Pool({
-  connectionString: PG_URI,
-});
+const pool = new Pool({ connectionString: process.env.PG_URI });
 
 // Adding some notes about the database here will be helpful for future you or other developers.
 // Schema for the database can be found below:
