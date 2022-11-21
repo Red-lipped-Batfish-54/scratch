@@ -8,7 +8,7 @@ router.post('/', pollFunctions.savePollFormat, (req, res) => {
 })
 
 router.get('/:id', pollFunctions.getPollFormat, (req, res) => {
-    res.status(200).json(res.locals.poll_options);
+    res.status(200).json(res.locals.getPollFormat);
     return;
 })
 

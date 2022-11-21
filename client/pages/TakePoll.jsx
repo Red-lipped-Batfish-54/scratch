@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function TakePoll() {
     const { id } = useParams();
+    const [prompt, setPrompts] = useState('');
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
       try {
         const fetchPollQuestions = async () => {
-          const response = await fetch(`http://localhost:3000/api/${id}`)
+          const response = await fetch(`http://localhost:3000/api/poll/${id}`)
           const accessPoll = await response.json();
-          const pollOptions = [];
-          
+          const pollOptions = accessPoll.pollOptionsArray;
+          const pollPrompt = accessPoll.pollPrompt;
+          setOptions(pollOptions);
+          setPrompts(pollPrompt);
         }
       }
       catch(err) {
@@ -17,12 +21,24 @@ function TakePoll() {
       }
     })
     
+    const checkBoxOptions = [];
+
+    pollOptions.forEach((option) => {
+        checkBoxOptions.push(
+          <div>
+            <input type="checkbox"></input>
+            <h3>{option}</h3>
+            <br></br>
+          </div>
+        )
+    })
+
+
     return (
         <div>
             <h1>Take Poll</h1>
-            <input type="checkbox"></input><br></br>
-            <input type="checkbox"></input><br></br>
-            <input type="checkbox"></input><br></br>
+            <h2>{pollPrompt}</h2>
+            {checkBoxOptions}
         </div>
     )
 }

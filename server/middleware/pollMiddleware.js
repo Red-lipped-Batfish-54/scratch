@@ -11,7 +11,17 @@ middleware.savePollFormat = (req, res, next) => {
 middleware.getPollFormat = async (req, res, next) => {
     try {
       const results = await db.query("SELECT poll_options, poll_prompt FROM poll WHERE poll_id = $1", [req.params.id]);
-      res.locals.poll_options = results.rows;
+      let pollOptions = results.rows;
+      const pollOptionsArray = [];
+      let pollPrompt;
+      pollOptions.forEach((object) => {
+        if (object.poll_options) pollOptionsArray.push(object.poll_options);
+        if (object.poll_prompt) pollPrompt = object.poll_prompt;
+      })
+      res.locals.getPollFormat = {
+        pollOptionsArray: pollOptionsArray,
+        pollPrompt: pollPrompt
+      }
       next();
       return;
     }
