@@ -1,6 +1,5 @@
 // Import express and import middleware dependencies
 const express = require('express');
-const db = require('./db/db.js');
 const cors = require('cors');
 // const cookierParser = require('cookie-parser');
 const path = require('path');
@@ -55,6 +54,11 @@ app.get("/api/flasks", async(req, res)=>{
     } catch(err){ 
       console.log(err)
     }
+})
+
+// Return all unmatched get requests to index.html
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build/index.html' ));
 })
 
 // Global error handler
