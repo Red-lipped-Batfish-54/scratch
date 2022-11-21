@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function TakePoll() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [prompt, setPrompt] = useState('');
     const [checked, setChecked] = useState([]);
     const [pollOptions, setPollOptions] = useState([]);
@@ -40,18 +41,19 @@ function TakePoll() {
     };
 
     const submit = (event) => {
-        event.preventDefault();
-        const dataToSend = {
-          answer: checked[0],
-          user: name
-        }
-        fetch(`http://localhost:3000/api/poll/${id}`, {
-            method: "POST", 
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dataToSend),
-        }) 
+      event.preventDefault();
+      const dataToSend = {
+        answer: checked[0],
+        user: name
+      }
+      fetch(`http://localhost:3000/api/poll/${id}`, {
+          method: "POST", 
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(dataToSend),
+      }) 
+      navigate(`/${id}/display`);
     }
 
     const checkBoxOptions = [];

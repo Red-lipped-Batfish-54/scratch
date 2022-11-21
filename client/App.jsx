@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreatePoll from './pages/CreatePoll';
 import TakePoll from './pages/TakePoll';
-// import DisplayPoll from './pages/DisplayPoll';
+import DisplayPoll from './pages/DisplayPoll';
 
 {/* <Route path='/' element={<Homepage />} /> */}
 
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<CreatePoll />} />
         <Route path='/:id' element={<TakePoll />} />
-        {/* <Route path='/:id/display' element={<DisplayPoll />} /> */}
+        <Route path='/:id/display' element={<DisplayPoll />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
