@@ -17,4 +17,9 @@ router.get('/:id', pollFunctions.getPollResponses, (req, res) => {
     return;  
 })
 
+router.delete('/:id/:key', pollFunctions.deletePoll, (req, res) => {
+    res.status(204).json(res.locals);
+    return;  
+})
+
 module.exports = router;

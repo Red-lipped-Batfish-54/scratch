@@ -34,4 +34,20 @@ middleware.getPollResponses = async (req, res, next) => {
       }
 }
 
+
+middleware.deletePoll = async (req, res, next) => {
+    try{
+        const results = await db.query("DELETE FROM poll WHERE id = $1", [req.params.key]);
+        console.log(req.params.key)
+        console.log('results', results);
+        res.locals = data;
+        next();
+        return;
+      } catch(err){ 
+        next(err);
+        return;
+      }
+}
+
+
 module.exports = middleware;

@@ -6,3 +6,30 @@ body {
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnPP9B7sJlf97pafbiCNpSpHJ23MP7t3m1-w&usqp=CAU);
     background-size: cover;
 }
+
+
+.displayPrompt {
+    margin: 5% 5%
+}
+
+.displayPoll {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-list-group {
+    width: 70%;
+    
+}
+
+.display-barchart {
+    /* margin: 10rem 10rem 10rem 10rem;
+    width: 800px; */
+    /* flex: flex-grow; */
+    width: 100%;
+
+
+  }
