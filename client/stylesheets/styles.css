@@ -20,23 +20,28 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .display-list-group {
     width: 100;
-    
+
 }
 
 .display-list-group2 {
     width: 800px;
-    
+
 }
 .display-barchart {
     /* margin: 10rem 10rem 10rem 10rem; */
     width: 800px;
-   
+
     /* flex: flex-grow; */
 
   }
-  
+
+
+
+.form-wrapper {
+    width: 40%;
+}
