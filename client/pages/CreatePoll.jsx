@@ -37,7 +37,7 @@ export const CreatePoll = () => {
 
   return <div>
     <h1 className='text-center'>Create a Poll</h1>
-    <div className='m-auto w-50 p-3 border border-info rounded'>
+    <div className='m-auto p-3 border border-info rounded form-wrapper'>
 
       <form onSubmit={handleFormData}>
         <label><strong>Title</strong></label>
