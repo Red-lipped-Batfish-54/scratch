@@ -29,27 +29,30 @@ export const CreatePoll = () => {
   for (let i = 1; i <= questions; i++) {
     numOfQuestions.push(
       <div className="input-group mb-3" key={i}>
-        <input type="text" name={`answer${i}`} className="form-control" placeholder={`Option ${i}`} required/>
-        <button type="button" onClick={() => setQuestions(questions - 1)} className="input-group-text" >X</button>
+        <input type="text" name={`answer${i}`} className="form-control border border-info" placeholder={`Option ${i}`} required/>
+        <button type="button" onClick={() => setQuestions(questions - 1)} className="input-group-text btn btn-outline-info" >X</button>
       </div>
     )
   }
 
-  return <div className='mt-5 w-50'>
-    <h1>Create a Poll</h1>
-    <form onSubmit={handleFormData}>
-      <label>Title</label>
-      <div className="input-group mb-3">
-        <input  type="text" name="title" className="form-control" placeholder="Type your question here" required/>
-      </div>
+  return <div>
+    <h1 className='text-center'>Create a Poll</h1>
+    <div className='m-auto w-50 p-3 border border-info rounded'>
 
-      <label>Questions:</label>
-      {numOfQuestions}
+      <form onSubmit={handleFormData}>
+        <label><strong>Title</strong></label>
+        <div className="input-group mb-3">
+          <input  type="text" name="title" className="form-control border border-info" placeholder="Type your question here" required/>
+        </div>
 
-      <button type="button" onClick={() => setQuestions(questions + 1)}>Add Option</button>
-      <hr />
-      <button type="submit" >Create Poll</button>
-    </form>
+        <label><strong>Answer Options:</strong></label>
+        {numOfQuestions}
+
+        <button className="btn btn-outline-info" type="button" onClick={() => setQuestions(questions + 1)}>Add Option</button>
+        <hr className="border border-info" />
+        <button className="btn btn-info text-white w-25" type="submit" >Create Poll</button>
+      </form>
+    </div>
   </div>
 }
 
