@@ -15,7 +15,7 @@ function App() {
       <Link to='/login'>Login - TEST LINK</Link>
       <Link to='/signup'>Signup - TEST LINK</Link>
       <Link to='/1/display'>diplay1</Link>
-      <Link to='/poll/1'>TAKE POLL TEST</Link>
+      <Link to='/1'>TAKE POLL TEST</Link>
       <Routes>
         <Route path='/' element={<CreatePoll />} />
         <Route path='/:id' element={<TakePoll />} />

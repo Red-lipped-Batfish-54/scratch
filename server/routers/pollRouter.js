@@ -13,7 +13,7 @@ router.get('/:id', pollFunctions.getPollFormat, (req, res) => {
 })
 
 router.post('/:id', pollFunctions.savePollResponse, (req, res) => {
-    res.status(200).json(res.locals);
+    res.status(200).send('update successful');
     return;
 })
 

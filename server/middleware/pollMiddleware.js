@@ -48,10 +48,19 @@ middleware.getPollFormat = async (req, res, next) => {
 }
 
 middleware.savePollResponse = (req, res, next) => {
-    res.locals = {data: 'Im one poll response for ID: ' + req.params.id}
+  try{
+    const insert = 'INSERT INTO poll (poll_id, entries, user) VALUES ($1, $2, $3)';
+    const answer = req.body.answer;
+    const user = req.body.user;
+    const pollId = req.params.id
+    db.query(insert, [pollId, answer, user], (err, res) => {
+        console.log('update successful')
+      })
     next();
     return;
-
+  } catch(err) {
+    console.log(err)
+  }
 }
 
 middleware.getPollResponses = async (req, res, next) => {
