@@ -6,41 +6,27 @@ function TakePoll() {
     const [prompt, setPrompt] = useState('');
     const [checked, setChecked] = useState([]);
     const [pollOptions, setPollOptions] = useState([]);
-    const [checkBoxOptions, setCheckBoxOptions] = useState([]);
+    const [name, setName] = useState('');
+    let updatedList = [];
 
     useEffect(() => {
-      try {
-        const fetchPollQuestions = async () => {
-          const response = await fetch(`http://localhost:3000/api/poll/${id}`)
-          const accessPoll = await response.json();
-          const pollOptionsArray = accessPoll.pollOptionsArray;
-          console.log(pollOptionsArray)
-          setPollOptions(pollOptionsArray);
-          const pollPrompt = accessPoll.pollPrompt;
-          console.log(pollPrompt)
-          setPrompt(pollPrompt);
-          console.log('here is prompt');
-          console.log(prompt);
-          pollOptions.forEach((option) => {
-              checkBoxOptions.push(
-                <div>
-                  <input value={option} type="checkbox" onChange={handleCheck}></input>
-                  <h3>{option}</h3>
-                  <br></br>
-                </div>
-              )
-          })
-          setCheckBoxOptions(checkBoxOptions);
-        }
-        fetchPollQuestions();
+      const fetchPollQuestions = async () => {
+        const response = await fetch(`http://localhost:3000/api/poll/${id}`)
+        return await response.json();
       }
-      catch(err) {
-        console.log(err);
-      }
+
+      fetchPollQuestions()
+      .then((accessPoll) => {
+        const pollOptionsArray = accessPoll.pollOptionsArray;
+        setPollOptions(pollOptionsArray);
+        const pollPrompt = accessPoll.pollPrompt;
+        setPrompt(pollPrompt);
+      })
     }, [])
 
     const handleCheck = (event) => {
-        let updatedList = [...checked];
+        updatedList = [...checked];
+        console.log(updatedList);
         if (event.target.checked) {
           updatedList = [...checked, event.target.value];
         } else {
@@ -49,17 +35,35 @@ function TakePoll() {
         setChecked(updatedList);
     };
 
+    const handle = (event) => {
+      setName(event.target.value);
+    };
+
     const submit = (event) => {
         event.preventDefault();
+        const dataToSend = {
+          answer: checked[0],
+          user: name
+        }
         fetch(`http://localhost:3000/api/poll/${id}`, {
             method: "POST", 
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify(checked),
+            body: JSON.stringify(dataToSend),
         }) 
     }
 
+    const checkBoxOptions = [];
+    pollOptions.forEach((option) => {
+      checkBoxOptions.push(
+        <div>
+          <input value={option} key={option} name='entry' type="radio" onChange={handleCheck}></input>
+          <h3>{option}</h3>
+          <br></br>
+        </div>
+      )
+    })
   
     return (
         <div>
@@ -67,7 +71,7 @@ function TakePoll() {
             <h2>{prompt}</h2>
             <form onSubmit={submit}>
               {checkBoxOptions}
-              <input type='text' placeholder="enter your name"></input>
+              <input type='text' onChange={(event) => handle(event)} placeholder="enter your name"></input>
               <input type='submit' value="Submit!"></input>
             </form>
         </div>
