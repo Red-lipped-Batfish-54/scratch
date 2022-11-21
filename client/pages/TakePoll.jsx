@@ -1,42 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function TakePoll() {
+    // Create hooks
     const { id } = useParams();
     const [prompt, setPrompt] = useState('');
     const [checked, setChecked] = useState([]);
     const [pollOptions, setPollOptions] = useState([]);
-    const [checkBoxOptions, setCheckBoxOptions] = useState([]);
 
+    // Define helper functions
     useEffect(() => {
-      try {
-        const fetchPollQuestions = async () => {
-          const response = await fetch(`http://localhost:3000/api/poll/${id}`)
-          const accessPoll = await response.json();
-          const pollOptionsArray = accessPoll.pollOptionsArray;
-          console.log(pollOptionsArray)
-          setPollOptions(pollOptionsArray);
-          const pollPrompt = accessPoll.pollPrompt;
-          console.log(pollPrompt)
-          setPrompt(pollPrompt);
-          console.log('here is prompt');
-          console.log(prompt);
-          pollOptions.forEach((option) => {
-              checkBoxOptions.push(
-                <div>
-                  <input value={option} type="checkbox" onChange={handleCheck}></input>
-                  <h3>{option}</h3>
-                  <br></br>
-                </div>
-              )
-          })
-          setCheckBoxOptions(checkBoxOptions);
-        }
-        fetchPollQuestions();
+      const fetchPollQuestions = async () => {
+        const response = await fetch(`http://localhost:3000/api/poll/${id}`)
+        return await response.json();
       }
-      catch(err) {
-        console.log(err);
-      }
+      
+      fetchPollQuestions()
+      .then((accessPoll) => {
+        const pollOptionsArray = accessPoll.pollOptionsArray;
+        setPollOptions(pollOptionsArray);
+        const pollPrompt = accessPoll.pollPrompt;
+        setPrompt(pollPrompt);
+      })      
     }, [])
 
     const handleCheck = (event) => {
@@ -59,6 +44,17 @@ function TakePoll() {
             body: JSON.stringify(checked),
         }) 
     }
+
+    const checkBoxOptions = [];
+    pollOptions.forEach((option, i) => {
+      checkBoxOptions.push(
+        <div key={i}>
+          <input value={option} type="checkbox" onChange={handleCheck}></input>
+          <h3>{option}</h3>
+          <br></br>
+        </div>
+      )
+  })
 
   
     return (
