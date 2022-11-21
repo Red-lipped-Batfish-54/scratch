@@ -78,7 +78,9 @@ function DisplayPoll() {
         datasets: [{
           label: "votes",
           data: Object.entries(pollResult).map((entry)=> entry[1])
-        }]
+        }],
+        
+        
       }
 
       //getting the prompt to display on top of the page
@@ -95,16 +97,7 @@ function DisplayPoll() {
     {/* bar chart below */}
       <div className="barchartdiv mb-5">
          <h3 className="text-center text-muted">Poll Graph</h3>
-         <Bar className="display-barchart" data={pollGraph} options={{
-            title: {
-            display: true,
-            text: 'od600'
-            },
-            legend: {
-            display:true,
-            text: "hi"
-            }
-            }}/> 
+         <Bar className="display-barchart" data={pollGraph} /> 
         </div>
     {/*  */}
      

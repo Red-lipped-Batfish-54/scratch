@@ -20,6 +20,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .display-list-group {
@@ -34,9 +35,8 @@ body {
 .display-barchart {
     /* margin: 10rem 10rem 10rem 10rem; */
     width: 800px;
+   
     /* flex: flex-grow; */
- 
-    ;
-
 
   }
+  
