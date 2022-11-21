@@ -22,7 +22,7 @@ export const CreatePoll = () => {
       body: JSON.stringify(results)
     });
     const data = await response.json();
-    navigate(`/${data}/display`);
+    navigate(`/${data}`);
   }
 
   const numOfQuestions = [];
