@@ -43,3 +43,6 @@ INSERT INTO poll (poll_id, poll_prompt) values (1,'What is your favorite type of
 
 //spelled fishes wrong so correcting it
 UPDATE poll SET poll_options = 'fishes' WHERE id = 7;
+
+//update jess
+"UPDATE poll SET poll_id, options=$2, users=$3, entries=$4 WHERE id=$5 returning *"

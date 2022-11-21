@@ -48,6 +48,27 @@ middleware.deletePoll = async (req, res, next) => {
         return;
       }
 }
-
+//in progress
+middleware.updatePoll = async (req, res, next) => {
+    try{
+        console.log('in updatepoll middleware', req.body)
+        console.log(req.params.key)
+        const results = await db.query("UPDATE poll SET users=$1, entries=$2 WHERE id=$3", [req.body.users, req.body.entries, req.params.key]);
+        // console.log(req.params.key)
+        // console.log('results', results);
+        const data = {
+            status: "success",
+            results: results.rows.length,
+              poll: results.rows[0]
+          };
+        res.locals = data;
+        next();
+        return;
+      } catch(err){ 
+        console.log
+        next(err);
+        return;
+      }
+}
 
 module.exports = middleware;

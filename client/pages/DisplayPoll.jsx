@@ -6,84 +6,52 @@ import { Chart as ChartJS} from 'chart.js/auto'
 // npm install chart.js
 // npm install react-chartjs-2
 
-
 function DisplayPoll() {
 
     const [polls, setPolls] = useState([]);
     const {id} = useParams();
-    const [disable, setDisable ] = useState(true);
-    const [val, setValue] = useState("");
-    const [user, setUser] = useState("");
 
-   
+    const [value, setValue] = useState('')
+    const [updated, setUpdated] = useState(0);
+  //   const [, updateState] = React.useState();
+  // const forceUpdate = React.useCallback(() => updateState({}), []);
+
 
     useEffect(()=>{
         const fetchPolls = async () => {
             let response = await fetch(`http://localhost:3000/api/poll/${id}`)
         let data = await response.json()
-        // console.log(data)
-        console.log('polls', polls)
+
         setPolls(data.poll)
-       
-        console.log('data.poll', data.poll)
-        ///////////////////////
-        // setUser(data.poll.user)
-        // console.log('data.poll.user', data.poll)
-        console.log('polls', polls)
+  
         }
         fetchPolls()
         .catch(console.err)
     },[])  
-    console.log('polls', polls)
 
-    // function handleUpdate(e){
-    //     console.log('enters handleUpdate', 'e', e)
-    //     console.log('e.id', e.poll_id)
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     console.log('e.target', e.target)
-    //     // async function postFlask (){
-    //     //     const response = await fetch(`http://localhost:3000/api/poll/${id}`, {
-    //     //         method: 'PUT',
-    //     //         headers: {
-    //     //             'Content-Type': 'application/json'
-    //     //         },
-    //     //         body: JSON.stringify({
-    //     //             poll.id,
-
-    //     //         })
-    //     //     })
-    //     //   // const data = await response.json()  
-    //     //   // setFlasks(data.data.flasks) 
-    //     //   // console.log('submit update flask', data)
-    //     // }
-    //     // postFlask()
-    //     // .catch(err => console.log('error in post server adding flask'))
-    //      }
-
-    function handleDelete(e, key, poll_id, users, entries) {
+  
+    async function handleDelete(e, key, poll_id, users, entries) {
         console.log("entering handleSubmit?")
-      
         e.preventDefault();
-        // e.stopPropagation();
-        console.log('e', e);
-        console.log('e.target', e.target.parentElement.parentElement)
-        console.log('id', key)
-        console.log('poll.poll_id', poll_id)
         
         async function postFlask (){
-            const response = await fetch(`http://localhost:3000/api/poll/${poll_id}/${key}`, {
-                method: 'DELETE'
+         const response = await fetch(`http://localhost:3000/api/poll/${poll_id}/${key}`, {
+            method: 'DELETE'
       
             })
-          // const data = await response.json()  
-          // setFlasks(data.data.flasks) 
-          // console.log('submit update flask', data)
         }
-        postFlask()
+        await postFlask()
         .catch(err => console.log('error in post server deleting flask'))
         // navigateFlaskHome()
-      
+
+      const fetchPolls = async () => {
+        let response = await fetch(`http://localhost:3000/api/poll/${id}`)
+        let data = await response.json()
+        setPolls(data.poll)
+        }
+        await fetchPolls()
+        .catch(console.err)
+       
       }
       //filtered poll:  removed all rows that did not have entries.  
     let filteredPoll = polls.filter(poll => poll.entries !== null)
@@ -136,32 +104,17 @@ function DisplayPoll() {
             }
             }}/> 
         </div>
-    {/*  
+    {/*  */}
      
          
-          
+    {   polls.filter(poll => poll.entries !== null) &&
+      polls.filter(poll => poll.entries !== null).map(poll => { return (<UpdateTable poll={poll} setValue={setValue}></UpdateTable>) })
+      }
+        
             
-                {   polls.filter(poll => poll.entries !== null) &&
-                    polls.filter(poll => poll.entries !== null).map(poll => {
-                        return (
 
-
-                            <div className="updateFlask">
-      
-      <form key={poll.id} action="">
-        <div className="form-group">
-          <label htmlFor="cell_bank">{poll.id}</label>
-          <input id={poll.id} placeholder={poll.users} onChange={e=> setUser(e.target.value)} className="form-control" type="text"></input>
-        <button type="submit" onClick={handleUpdate} className="btn btn-danger btn-sm  ">Update</button>   
-        </div>
-                     
-      </form>
-      </div>
-                        )
-                    })
-                }
            
-     */}  
+       
       
      {/*  */} 
      <div className="display-list-group2">
@@ -201,4 +154,68 @@ function DisplayPoll() {
     )
 }
 
-export default DisplayPoll
+
+function UpdateTable({poll, setValue}) {
+ 
+  const [users, setUsers] = useState(poll.users);
+  const [entries, setEntries] = useState(poll.entries);
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
+
+  // console.log('poll prop in updateTable component', poll.users)
+  async function handleSubmit(e, key, poll_id){
+    // console.log('enters handleUpdate', 'e', e)
+    // console.log('alll handleUpdate params', e, key, poll_id, options, users, entries)
+    e.stopPropagation();
+    e.preventDefault();
+    // console.log('po'key', key)
+    async function postFlask (){
+        const response = await fetch(`http://localhost:3000/api/poll/${poll_id}/${key}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              users, 
+              entries 
+            })
+        })
+      // const data = await response.json()  
+      // setFlasks(data.data.flasks) 
+      // console.log('submit update flask', data)
+    }
+    await postFlask()
+    // await forceUpdate()
+    // await setValue('update')
+    await refreshPage()
+    .catch(err => console.log('error in post server adding flask'))
+    
+     }
+
+     let reactkey = 0;
+     console.log('poll prop in updateTable component handlesubmit', poll.id)
+
+     
+  return (
+    <div>
+        <form key={poll.id} action="">
+            <div className="form-row row mb-3">
+            <div className="col-sm">
+            users <input type="text" value={users} onChange={e=> setUsers(e.target.value)} className="form-control" />
+         </div> 
+         <div className="col-sm">
+            vote <input type="text" className="form-control" value={entries} onChange={e=> setEntries(e.target.value)}/>
+         </div> 
+            <button type="submit" onClick={(e) => handleSubmit(e, poll.id, poll.poll_id)} className="btn btn-danger btn-sm  ">Update</button>   
+          </div>
+                         
+          </form>
+     
+    </div>
+  )
+}
+
+
+
+export { DisplayPoll, UpdateTable }
