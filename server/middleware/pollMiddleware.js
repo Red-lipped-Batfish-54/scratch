@@ -51,34 +51,39 @@ const pollMiddleware = {};
 // we need to insert new poll into poller table
 // insert options into options table
 
-pollMiddleware.newPoll = (req, res, next) => {
+pollMiddleware.newPoll = async (req, res, next) => {
   const {name, options} = req.body;
   const pollName = [name];
-
   // inserting a new topic into our poller table
   // return value should be the poll_id
   const newPollQuery = `INSERT INTO poller(poll_name)
   VALUES ($1)
   RETURNING poll_id;`
-  let pollId;
 
-  db.query(newPollQuery, pollName).then(result => {
-    pollId = result.rows[0].poll_id;
-    console.log('this is the poll id',pollId);
-    res.locals.result = pollId;
-    return next()
-  }).catch(err => console.log(err));
+
+ const result = await db.query(newPollQuery, pollName)
+ const pollId = result.rows[0].poll_id;
+ console.log('this is the poll id',pollId);
+ res.locals.result = pollId;
+ return next()
 
 
   // update choices in options table with poll id from previous query
-  const pollOptions = []
-  for (let i = 0; i < options.length; i++) {
-    pollOptions.push(options[i])
-  }
+  // // initiating forloop to run for as many choices 
+  // for (let i = 0; i< options.length; i++) {
 
-  const updateOptionsQuery = ``
+  //   let optionsValues = [pollId, 0]
+
+  //   optionsValues.push(options[i])
+
+  //   const updateOptionsQuery = `INSERT INTO options(choice, total, poller_id)
+  //   VALUES($3, $2, $1);`
+
+  // }
+
 
 }
+
 pollMiddleware.savePollResponse = (req, res, next) => {
   try{
     const insert = "INSERT INTO poll (poll_id, entries, users) VALUES ($1, $2, $3)";
