@@ -42,19 +42,19 @@ app.use('/api/user', userRouter);
 app.use('/api/poll', pollRouter);
 
 // Test route for database
-app.get("/api/flasks", async(req, res)=>{
-    try{
-      const results = await db.query("SELECT * FROM poll");
-      console.log(results);
-      res.status(200).json({
-        status: "success",
-        results: results.rows.length,
-          poll: results.rows
-      })
-    } catch(err){ 
-      console.log(err)
-    }
-})
+// app.get("/api/flasks", async(req, res)=>{
+//     try{
+//       const results = await db.query("SELECT * FROM poll");
+//       console.log(results);
+//       res.status(200).json({
+//         status: "success",
+//         results: results.rows.length,
+//           poll: results.rows
+//       })
+//     } catch(err){ 
+//       console.log(err)
+//     }
+// })
 
 // Return all unmatched get requests to index.html
 app.get('/*', (req, res) => {
