@@ -47,7 +47,6 @@ app.post('/payload', async(req, res) => {
   console.log(req.body.pull_request.repo);
   res.status(200).json('webhook test')
 });
-// TEST COMMENT
 
 // Test route for database
 app.get("/api/flasks", async(req, res)=>{
