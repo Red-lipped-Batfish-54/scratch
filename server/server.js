@@ -41,6 +41,14 @@ app.use('/api/user', userRouter);
 // Handle routes to poll functionality
 app.use('/api/poll', pollRouter);
 
+
+// testing webhook
+app.post('/payload', async(req, res) => {
+  console.log(req.body);
+  res.status(200).json('webhook test')
+});
+
+
 // Test route for database
 app.get("/api/flasks", async(req, res)=>{
     try{
@@ -51,7 +59,7 @@ app.get("/api/flasks", async(req, res)=>{
         results: results.rows.length,
           poll: results.rows
       })
-    } catch(err){ 
+    } catch(err){
       console.log(err)
     }
 })
@@ -66,7 +74,7 @@ app.use((err, req, res, next) => {
   console.error(err);
   res.sendStatus(500);
 })
-  
+
 
 app.listen(PORT, () => console.log(`SERVER IS LISTENING ON PORT: ${PORT}`)); //listens on port 3000 -> http://localhost:3000/
 
