@@ -41,10 +41,9 @@ app.use('/api/user', userRouter);
 // Handle routes to poll functionality
 app.use('/api/poll', pollRouter);
 
-
 // testing webhook
 app.post('/payload', async(req, res) => {
-  console.log(req.body.pull_request.repo);
+  console.log(req.body);
   res.status(200).json('webhook test')
 });
 
